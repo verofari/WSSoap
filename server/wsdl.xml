@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap-service.server/index.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ProxyServer" targetNamespace="http://soap-service.server/index.php">
+  <types>
+    <xsd:schema targetNamespace="http://soap-service.server/index.php">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </xsd:schema>
+  </types>
+  <portType name="ProxyServerPort">
+    <operation name="saludarCliente">
+      <input message="tns:saludarClienteIn"/>
+      <output message="tns:saludarClienteOut"/>
+    </operation>
+    <operation name="saludarUsuario">
+      <input message="tns:saludarUsuarioIn"/>
+      <output message="tns:saludarUsuarioOut"/>
+    </operation>
+  </portType>
+  <binding name="ProxyServerBinding" type="tns:ProxyServerPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="saludarCliente">
+      <soap:operation soapAction="http://soap-service.server/index.php#saludarCliente"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://soap-service.server/index.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://soap-service.server/index.php"/>
+      </output>
+    </operation>
+    <operation name="saludarUsuario">
+      <soap:operation soapAction="http://soap-service.server/index.php#saludarUsuario"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://soap-service.server/index.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://soap-service.server/index.php"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ProxyServerService">
+    <port name="ProxyServerPort" binding="tns:ProxyServerBinding">
+      <soap:address location="http://soap-service.server/index.php"/>
+    </port>
+  </service>
+  <message name="saludarClienteIn"/>
+  <message name="saludarClienteOut">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <message name="saludarUsuarioIn"/>
+  <message name="saludarUsuarioOut">
+    <part name="return" type="xsd:string"/>
+  </message>
+</definitions>
